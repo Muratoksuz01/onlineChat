@@ -7,7 +7,7 @@ import {AuthContext} from "../helper/AuthContex"
 
 function Login() {
   const navigate = useNavigate();
-  const {setAuthState}=useContext(AuthContext)
+  const {authState,setAuthState}=useContext(AuthContext)
   // Formun başlangıç değerleri
   const initialValues = {
     username: "murat",
@@ -27,27 +27,25 @@ function Login() {
   // Form gönderme işlemi
   const onSubmit = (values) => {
     axios
-      .get("http://localhost:5000/users")
+      .post("http://localhost:8000/api/users/signin", values) // Portu kontrol edin
       .then((response) => {
-        const users = response.data;
-
-        // Gönderilen username ve password ile eşleşme kontrolü
-        const user = users.find(
-          (u) => u.username === values.username && u.password === values.password
-        );
-
-        if (user) {
-          setAuthState({ username: user.username, id: user.id, status: true }); // Kullanıcı bilgisini kaydet
-          navigate("/"); // Ana sayfaya yönlendir
-        } else {
-          alert("Invalid username or password");
-        }
+        console.log("login gelen cevap :",response.data)
+        const { token, userId ,username} = response.data;
+        console.log(username)
+        console.log(userId)
+       // console.log("login kısı :",values)
+        setAuthState({ username: username, id: userId, status: true });
+        console.log("login auth set edildi ",authState)
+        localStorage.setItem("accessToken", token);
+        navigate("/");
       })
       .catch((error) => {
-        console.error("Login error:", error);
-        alert("Failed to login. Please try again.");
+        console.error("Login error:", error.response || error.message); // Daha fazla bilgi logla
+        alert(error.response?.data?.message || "Failed to login. Please try again.");
       });
   };
+  
+  
 
   return (
     <div className="flex items-center justify-center">

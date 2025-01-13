@@ -1,19 +1,46 @@
 {
   "users": [
     {
-      "id": "4826",
+      "id": "1",
       "username": "murat",
-      "password": "1234"
+      "password": "1234",
+      "phone": "5551234567",
+      "avatar": "/uploads/murat1.jpg"
     },
     {
-      "id": "0001",
+      "id": "2",
       "username": "murat",
-      "password": "12345"
+      "password": "12345",
+      "phone": "5559876543",
+      "avatar": "/uploads/murat2.jpg"
     },
     {
-      "id": "19c0",
+      "id": "3",
       "username": "ali",
-      "password": "ali1"
+      "password": "ali1",
+      "phone": "5551112222",
+      "avatar": "/uploads/ali.jpg"
+    },
+    {
+      "id": "5e4b",
+      "username": "testuser",
+      "password": "1234",
+      "phone": "5555555555",
+      "avatar": "/uploads/1736716394079-Screenshot 2025-01-12 193536.png"
+    },
+    {
+      "id": "48f9",
+      "username": "cdss",
+      "password": "cdssd",
+      "phone": "5555555555",
+      "avatar": "/uploads/1736716606256-Screenshot 2025-01-11 200637.png"
+    },
+    {
+      "id": "635d",
+      "username": "cdsshtr",
+      "password": "cdssd",
+      "phone": "5555555555",
+      "avatar": "/uploads/1736716674529-Screenshot 2025-01-11 200637.png"
     }
   ]
 }
