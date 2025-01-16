@@ -4,12 +4,12 @@ import Sidebar from "../components/Sidebar";
 import ChatDetail from "../components/ChatDetail";
 import Settings from "../components/Settings";
 function Dashboard() {
-  const [selectedChatId, setSelectedChatId] = useState(null);
+  const [selectedChat, setSelectedChat] = useState(null);
   const [activeComponent, setActiveComponent] = useState(null);
 
   const renderContent = () => {
-    if (activeComponent === "chat" && selectedChatId) {
-      return <ChatDetail chatId={selectedChatId} />;
+    if (activeComponent === "chat" && selectedChat) {
+      return <ChatDetail chat={selectedChat} />;
     } else if (activeComponent === "settings") {
       return <Settings />;
     }
@@ -18,11 +18,11 @@ function Dashboard() {
 
 
   return (
-    <div className="flex h-screen p-4 bg-gray-950">
+    <div className="flex h-screen p-4 bg-gray-900">
       {/* Sidebar */}
       <Sidebar
-       onSelectChat={(id) => {
-        setSelectedChatId(id)
+       onSelectChat={(chat) => {
+        setSelectedChat(chat)
         setActiveComponent("chat");
         }}
         onOpenSettings={() => setActiveComponent("settings")}

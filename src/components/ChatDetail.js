@@ -1,30 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { } from "react";
 import HeadersOfChatDatail from "./HeadersOfChatDatail"
 import FooterOfChatDetail from "./FooterOfChatDetail"
 import ContentOfChatDetail from "./ContentOfChatDetail"
-const ChatDetail = ({ chatId }) => {
-  //const [messages,setMessages] = useState([]);
+const ChatDetail = ({ chat }) => {
 
-  // useEffect(() => {
-  //   // Veritabanından mesajları çekme (örnek API çağrısı)
-  //   const fetchMessages = async () => {
-  //     try {
-  //       const response = await fetch(`/api/messages?chatId=${chatId}`);
-  //       const data = await response.json();
-  //       setMessages(data);
-  //     } catch (error) {
-  //       console.error("Error fetching messages:", error);
-  //     }
-  //   };
-
-  //   fetchMessages();
-  // }, [chatId]);
 
   return (
-    <div className="flex flex-col min-h-full" style={{ padding: "20px" }}>
-      <HeadersOfChatDatail />
-      <ContentOfChatDetail />
-      <FooterOfChatDetail />
+    <div className="flex flex-col " style={{ padding: "20px" }}>
+      <HeadersOfChatDatail  chat={chat} />
+      <ContentOfChatDetail className={"grow"} chat={chat} />
+      <FooterOfChatDetail className={"flex-none"} chat={chat}/>
     </div>
   );
 };

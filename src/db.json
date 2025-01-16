@@ -4,43 +4,234 @@
       "id": "1",
       "username": "murat",
       "password": "1234",
-      "phone": "5551234567",
+      "phone": "+905551234567",
       "avatar": "/uploads/murat1.jpg"
     },
     {
       "id": "2",
-      "username": "murat",
-      "password": "12345",
-      "phone": "5559876543",
+      "username": "user1",
+      "password": "user1",
+      "phone": "+905559876543",
       "avatar": "/uploads/murat2.jpg"
     },
     {
       "id": "3",
-      "username": "ali",
-      "password": "ali1",
-      "phone": "5551112222",
+      "username": "user2",
+      "password": "user2",
+      "phone": "+905551112222",
       "avatar": "/uploads/ali.jpg"
     },
     {
-      "id": "5e4b",
-      "username": "testuser",
-      "password": "1234",
-      "phone": "5555555555",
-      "avatar": "/uploads/1736716394079-Screenshot 2025-01-12 193536.png"
+      "id": "4",
+      "username": "user3",
+      "password": "user3",
+      "phone": "+905555555555",
+      "avatar": "/uploads/murat2.jpg"
     },
     {
-      "id": "48f9",
-      "username": "cdss",
-      "password": "cdssd",
-      "phone": "5555555555",
-      "avatar": "/uploads/1736716606256-Screenshot 2025-01-11 200637.png"
+      "id": "5",
+      "username": "user4",
+      "password": "user4",
+      "phone": "+905555555555",
+      "avatar": "/uploads/murat1.jpg"
     },
     {
-      "id": "635d",
-      "username": "cdsshtr",
-      "password": "cdssd",
-      "phone": "5555555555",
-      "avatar": "/uploads/1736716674529-Screenshot 2025-01-11 200637.png"
+      "id": "6",
+      "username": "user5",
+      "password": "user5",
+      "phone": "+905555555555",
+      "avatar": "/uploads/murat2.jpg"
+    }
+  ],
+  "messages": [
+    {
+      "id": "101",
+      "SenderId": "1",
+      "ReceiverId": "2",
+      "message": "Hello, how are you?",
+      "timestamp": "2025-01-13T09:00:00Z"
+    },
+    {
+      "id": "102",
+      "SenderId": "2",
+      "ReceiverId": "1",
+      "message": "I'm good, thanks! How about you?",
+      "timestamp": "2025-01-13T09:05:00Z"
+    },
+    {
+      "id": "103",
+      "SenderId": "1",
+      "ReceiverId": "3",
+      "message": "Are you coming to the meeting?",
+      "timestamp": "2025-01-13T10:00:00Z"
+    },
+    {
+      "id": "104",
+      "SenderId": "3",
+      "ReceiverId": "1",
+      "message": "Yes, I'll be there in 10 minutes.",
+      "timestamp": "2025-01-13T10:15:00Z"
+    },
+    {
+      "id": "105",
+      "SenderId": "4",
+      "ReceiverId": "5",
+      "message": "Can we reschedule our call?",
+      "timestamp": "2025-01-13T11:00:00Z"
+    },
+    {
+      "id": "106",
+      "SenderId": "5",
+      "ReceiverId": "4",
+      "message": "Sure, how about tomorrow at 3 PM?",
+      "timestamp": "2025-01-13T11:15:00Z"
+    },
+    {
+      "id": "107",
+      "SenderId": "2",
+      "ReceiverId": "3",
+      "message": "Did you finish the report?",
+      "timestamp": "2025-01-13T12:00:00Z"
+    },
+    {
+      "id": "108",
+      "SenderId": "3",
+      "ReceiverId": "2",
+      "message": "Yes, I sent it earlier. Did you get it?",
+      "timestamp": "2025-01-13T12:05:00Z"
+    },
+    {
+      "id": "109",
+      "SenderId": "5",
+      "ReceiverId": "1",
+      "message": "We need to discuss the project next week.",
+      "timestamp": "2025-01-13T12:30:00Z"
+    },
+    {
+      "id": "110",
+      "SenderId": "1",
+      "ReceiverId": "5",
+      "message": "Got it, let's schedule a meeting.",
+      "timestamp": "2025-01-13T12:45:00Z"
+    },
+    {
+      "id": "111",
+      "SenderId": "4",
+      "ReceiverId": "2",
+      "message": "How was your weekend?",
+      "timestamp": "2025-01-13T13:00:00Z"
+    },
+    {
+      "id": "112",
+      "SenderId": "2",
+      "ReceiverId": "4",
+      "message": "It was great! I went hiking. What about you?",
+      "timestamp": "2025-01-13T13:10:00Z"
+    },
+    {
+      "id": "113",
+      "SenderId": "3",
+      "ReceiverId": "5",
+      "message": "Can you send me the latest numbers for the report?",
+      "timestamp": "2025-01-13T13:20:00Z"
+    },
+    {
+      "id": "114",
+      "SenderId": "5",
+      "ReceiverId": "3",
+      "message": "Sure, I'll send them in 10 minutes.",
+      "timestamp": "2025-01-13T13:30:00Z"
+    },
+    {
+      "id": "115",
+      "SenderId": "1",
+      "ReceiverId": "4",
+      "message": "Do you want to grab lunch today?",
+      "timestamp": "2025-01-13T14:00:00Z"
+    },
+    {
+      "id": "116",
+      "SenderId": "4",
+      "ReceiverId": "1",
+      "message": "That sounds great! Where should we go?",
+      "timestamp": "2025-01-13T14:10:00Z"
+    },
+    {
+      "id": "117",
+      "SenderId": "2",
+      "ReceiverId": "5",
+      "message": "I need your help with the new design.",
+      "timestamp": "2025-01-13T14:30:00Z"
+    },
+    {
+      "id": "118",
+      "SenderId": "5",
+      "ReceiverId": "2",
+      "message": "I'll check it out and let you know my thoughts.",
+      "timestamp": "2025-01-13T14:40:00Z"
+    },
+    {
+      "id": "119",
+      "SenderId": "3",
+      "ReceiverId": "1",
+      "message": "I have a few updates on the project, can we talk later?",
+      "timestamp": "2025-01-13T15:00:00Z"
+    },
+    {
+      "id": "120",
+      "SenderId": "1",
+      "ReceiverId": "3",
+      "message": "Sure, I have some time after 4 PM.",
+      "timestamp": "2025-01-13T15:10:00Z"
+    },
+    {
+      "id": "448131",
+      "SenderId": "1",
+      "ReceiverId": "2",
+      "message": "aaaa",
+      "timestamp": "2025-01-15T16:52:19.371Z"
+    },
+    {
+      "id": "25280",
+      "SenderId": "1",
+      "ReceiverId": "2",
+      "message": "aaaa",
+      "timestamp": "2025-01-15T16:52:25.186Z"
+    },
+    {
+      "id": "796728",
+      "SenderId": "1",
+      "ReceiverId": "1",
+      "message": "murah merhba",
+      "timestamp": "2025-01-16T10:15:33.893Z"
+    },
+    {
+      "id": "765486",
+      "SenderId": "1",
+      "ReceiverId": "1",
+      "message": "merba2",
+      "timestamp": "2025-01-16T10:16:08.027Z"
+    },
+    {
+      "id": "140176",
+      "SenderId": "1",
+      "ReceiverId": "3",
+      "message": "😁😃😃😃😃😃😃😃😃vdsvsdvsd",
+      "timestamp": "2025-01-16T11:23:24.078Z"
+    },
+    {
+      "id": "952897",
+      "SenderId": "1",
+      "ReceiverId": "3",
+      "message": "ali",
+      "timestamp": "2025-01-16T11:23:53.275Z"
+    },
+    {
+      "id": "238934",
+      "SenderId": "1",
+      "ReceiverId": "3",
+      "message": "c",
+      "timestamp": "2025-01-16T11:24:12.740Z"
     }
   ]
 }

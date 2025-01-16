@@ -1,12 +1,10 @@
-import React, { useContext } from 'react'
-import { AuthContext } from "../helper/AuthContex";
+import React, {  } from 'react'
 import { LuPhone } from "react-icons/lu";
 import { PiVideoCameraBold } from "react-icons/pi";
 import { FaCircleInfo } from "react-icons/fa6";
 
 
-function HeadersOfChatDatail() {
-    const { authState, setAuthState } = useContext(AuthContext);
+function HeadersOfChatDatail({chat}) {
 
     return (
         <>
@@ -16,11 +14,11 @@ function HeadersOfChatDatail() {
 
                 <img
                     className="w-10 h-10 rounded-full"
-                    src="./Screenshot 2025-01-11 200637.png"
+                    src={`http://localhost:8000${chat.avatar}`}
                     alt=""
                 />
                 <div className="font-medium dark:text-white">
-                    <div>{authState.username}</div>
+                    <div>{chat.username}</div>
                 </div>
             </div>
             <div className='flex gap-5'>

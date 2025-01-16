@@ -3,11 +3,12 @@ import { Formik, Form, Field, ErrorMessage } from "formik"; // Formik bileşenle
 import * as Yup from "yup"; // Yup ile doğrulama
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {AuthContext} from "../helper/AuthContex"
+import { AuthContext } from "../helper/AuthContex";
 
 function Login() {
   const navigate = useNavigate();
-  const {authState,setAuthState}=useContext(AuthContext)
+  const { setAuthState } = useContext(AuthContext);
+
   // Formun başlangıç değerleri
   const initialValues = {
     username: "murat",
@@ -29,88 +30,74 @@ function Login() {
     axios
       .post("http://localhost:8000/api/users/signin", values) // Portu kontrol edin
       .then((response) => {
-        console.log("login gelen cevap :",response.data)
-        const { token, userId ,username} = response.data;
-        console.log(username)
-        console.log(userId)
-       // console.log("login kısı :",values)
-        setAuthState({ username: username, id: userId, status: true });
-        console.log("login auth set edildi ",authState)
+        console.log("login gelen cevap :", response.data);
+        const { token, userId, username } = response.data;
+
+        // Kullanıcı verilerini authState'e kaydediyoruz
+        setAuthState({ username, id: userId, status: true });
         localStorage.setItem("accessToken", token);
-        navigate("/");
+
+        // Giriş başarılı, yönlendiriyoruz
+        navigate("/dashboard");
       })
       .catch((error) => {
         console.error("Login error:", error.response || error.message); // Daha fazla bilgi logla
         alert(error.response?.data?.message || "Failed to login. Please try again.");
       });
   };
-  
-  
 
   return (
-    <div className="flex items-center justify-center">
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Login to Your Account
-          </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">
-            Or{" "}
-            <a
-              href="/register"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              register a new account
-            </a>
-          </p>
-        </div>
-
+    <div className="flex justify-center items-center min-h-screen bg-gray-900">
+      <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-2xl shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+        <h2 className="text-2xl font-bold text-center mb-4 text-gray-300">Login</h2>
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
           onSubmit={onSubmit}
         >
           {({ isSubmitting }) => (
-            <Form className="mt-8 space-y-6">
-              <div className="rounded-md shadow-sm -space-y-px">
-                <div>
-                  <Field
-                    id="username"
-                    name="username"
-                    type="text"
-                    autoComplete="username"
-                    placeholder="Username"
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  />
-                  <ErrorMessage
-                    name="username"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
-                <div>
-                  <Field
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    placeholder="Password"
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                  />
-                  <ErrorMessage
-                    name="password"
-                    component="div"
-                    className="text-red-500 text-sm mt-1"
-                  />
-                </div>
+            <Form className="space-y-6">
+              <div>
+                <Field
+                  id="username"
+                  name="username"
+                  type="text"
+                  placeholder="Username"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
               </div>
-
+              <div className="mb-3">
+                <Field
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+              <div className="text-sm text-center">
+                <a
+                  href="/register"
+                  className="font-medium text-blue-200 hover:underline"
+                >
+                  Don’t have an account? Register here.
+                </a>
+              </div>
               <div>
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                   {isSubmitting ? "Logging in..." : "Login"}
                 </button>
@@ -120,8 +107,8 @@ function Login() {
         </Formik>
       </div>
     </div>
-    </div>
   );
+  
 }
 
 export default Login;

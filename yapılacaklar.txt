@@ -2,8 +2,8 @@ json-server --watch src/db.json --port 5000
 npx tailwindcss -i ./src/index.css -o ./public/output.css --watch
 
 ayarlar sayfası tasarlanacak 
-register sayfası guncellenek 
-auth islemleri yapılcak 
 
 
 
+
+webhistory arastur 

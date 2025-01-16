@@ -34,106 +34,103 @@ function Register() {
   };
 
   // Form gönderme işlemi
-  const onSubmit =  (values, { setSubmitting }) => {
-    
-      const formData = new FormData();
-      formData.append("username", values.username);
-      formData.append("password", values.password);
-      formData.append("phone", values.phone);
-      if (file) {
-        formData.append("avatar", file);
-      }
-  
-      axios.post("http://localhost:8000/api/users/signup", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
-  
-      alert("Registration successful!");
-      navigate("/login");
-   
+  const onSubmit = (values, { setSubmitting }) => {
+
+    const formData = new FormData();
+    formData.append("username", values.username);
+    formData.append("password", values.password);
+    formData.append("phone", values.phone);
+    if (file) {
+      formData.append("avatar", file);
+    }
+
+    axios.post("http://localhost:8000/api/users/signup", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+
+    alert("Registration successful!");
+    navigate("/login");
+
   };
-  
+
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          <h2 className="text-2xl font-bold text-center">Register</h2>
-          <Formik
-            initialValues={initialValues}
-            validationSchema={validationSchema}
-            onSubmit={onSubmit}
-          >
-            {({ isSubmitting }) => (
-              <Form className="mt-8 space-y-6">
-                <div className="rounded-md shadow-sm -space-y-px">
-                  <div>
-                    <Field
-                      id="username"
-                      name="username"
-                      type="text"
-                      placeholder="Username"
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                    <ErrorMessage
-                      name="username"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-                  <div>
-                    <Field
-                      id="password"
-                      name="password"
-                      type="password"
-                      placeholder="Password"
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                    <ErrorMessage
-                      name="password"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-                  <div>
-                    <Field
-                      id="phone"
-                      name="phone"
-                      type="text"
-                      placeholder="Phone"
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-400 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                    <ErrorMessage
-                      name="phone"
-                      component="div"
-                      className="text-red-500 text-sm mt-1"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      id="avatar"
-                      name="avatar"
-                      type="file"
-                      accept="image/*"
-                      onChange={handleFileChange}
-                      className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    />
-                    {file && <p className="text-sm mt-1 text-green-500">Selected file: {file.name}</p>}
-                  </div>
-                </div>
-                <div>
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    {isSubmitting ? "Registering..." : "Register"}
-                  </button>
-                </div>
-              </Form>
-            )}
-          </Formik>
-        </div>
+    <div className=" flex justify-center items-center min-h-screen bg-gray-900">
+      <div className="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-2xl shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700 ">
+        <h2 className="text-2xl font-bold text-center mb-4 text-gray-300">Register</h2>
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={onSubmit}
+        >
+          {({ isSubmitting }) => (
+            <Form className="space-y-6">
+              <div className="">
+                <Field
+                  id="username"
+                  name="username"
+                  type="text"
+                  placeholder="Username"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <ErrorMessage
+                  name="username"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+              <div className="mb-3">
+                <Field
+                  id="password"
+                  name="password"
+                  type="password"
+                  placeholder="Password"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+              <div className="my-3">
+                <Field
+                  id="phone"
+                  name="phone"
+                  type="text"
+                  placeholder="Phone"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+                <ErrorMessage
+                  name="phone"
+                  component="div"
+                  className="text-red-500 text-sm mt-1"
+                />
+              </div>
+              <div>
+
+                <input
+                  id="avatar"
+                  name="avatar"
+                  onChange={handleFileChange}
+                  accept="image/*"
+                  className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg
+                        cursor-pointer bg-gray-300 dark:text-gray-400 focus:outline-none
+                       dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                  aria-describedby="user_avatar_help" type="file"></input>
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                >
+                  {isSubmitting ? "Registering..." : "Register"}
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );
