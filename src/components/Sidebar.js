@@ -7,16 +7,18 @@ import { IoChatboxOutline } from "react-icons/io5";
 import { FaCircleCheck } from "react-icons/fa6";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
+import { useWebSocket } from '../helper/WebsocketContext';
 
 import axios from 'axios';
 
 function Sidebar({ onSelectChat, onOpenSettings }) {
+    const { isConnected, disconnect, connectWebSocket } = useWebSocket();
+
     const navigate = useNavigate();
     const [activeChat, setActiveChat] = useState(null);  // Store active chat id
 
     const { authState, setAuthState } = useContext(AuthContext);
     const [AllChats, setAllChats] = useState([]);
-    console.log("sidebar authside",authState)
     const handleLogout = () => {
         setAuthState({ username: "", id: 0, status: false });
         localStorage.removeItem("accessToken");
@@ -26,12 +28,20 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
     const handleSelectChat = (chat) => {
         setActiveChat(chat.id); // Set active chat id when a chat is selected
         onSelectChat(chat); // Parent informs about the selected chat
+        if (isConnected) {
+            console.log("suanda bir websoket baglantısı var")
+            disconnect()
+            console.log("suanda var olan baglantı kapatıldı ")
+            connectWebSocket(chat.id)
+        } else {
+            connectWebSocket(chat.id)
+        }
     };
 
     useEffect(() => {
         axios.get("http://localhost:8000/api/users/GetAllChat")
             .then(res => {
-                console.log("allData:", res.data.alluser);
+                console.log("sidebar useeffect allData:", res.data.alluser);
                 setAllChats(res.data.alluser);
             })
             .catch(err => {
@@ -66,10 +76,10 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                 </div>
                 <div>
                     <div className="max-w-md mx-auto mt-3 ">
-                    
+
                         <div className="relative">
                             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                                <FiSearch  style={{ color: "#696463" }}/>
+                                <FiSearch style={{ color: "#696463" }} />
                             </div>
                             <input
                                 type="search"

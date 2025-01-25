@@ -4,10 +4,12 @@ import * as Yup from "yup"; // Yup ile doğrulama
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../helper/AuthContex";
+import { useWebSocket } from '../helper/WebsocketContext';
 
 function Login() {
   const navigate = useNavigate();
   const { setAuthState } = useContext(AuthContext);
+  const { connectWebSocket } = useWebSocket();
 
   // Formun başlangıç değerleri
   const initialValues = {
@@ -31,11 +33,12 @@ function Login() {
       .post("http://localhost:8000/api/users/signin", values) // Portu kontrol edin
       .then((response) => {
         console.log("login gelen cevap :", response.data);
-        const { token, userId, username } = response.data;
+        const { token, userId, username ,avatar} = response.data;
 
         // Kullanıcı verilerini authState'e kaydediyoruz
-        setAuthState({ username, id: userId, status: true });
+        setAuthState({ username, id: userId, status: true ,avatar:avatar});
         localStorage.setItem("accessToken", token);
+     //  connectWebSocket(response.data.username);
 
         // Giriş başarılı, yönlendiriyoruz
         navigate("/dashboard");
