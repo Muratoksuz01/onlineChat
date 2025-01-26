@@ -1,8 +1,15 @@
 json-server --watch src/db.json --port 5000
 npx tailwindcss -i ./src/index.css -o ./public/output.css --watch
 
-ayarlar sayfası tasarlanacak 
-
+--ayarlar sayfası tasarlanacak 
+--contentofchatdetail sayfasında ilk yuklendiginde ws den gelen mesaj olmadıgı icin undefined hatası var 
+  useEffect(() => {
+    console.log(" ws gelen message",message)
+    if (!message) return;
+    setMessages(prevMessages => [...prevMessages,message]);
+    
+  }, [message]); // dependency'i message olarak güncelliyoruz
+tam olarka bu var undefined hatası var 
 
 
 

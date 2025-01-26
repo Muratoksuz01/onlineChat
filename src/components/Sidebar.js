@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useEffect, useRef } from 'react';
 import { AuthContext } from "../helper/AuthContex";
 import { useNavigate } from "react-router-dom";
 import { LuBellRing } from "react-icons/lu";
@@ -8,6 +8,8 @@ import { FaCircleCheck } from "react-icons/fa6";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
 import { useWebSocket } from '../helper/WebsocketContext';
+import { IoSettingsOutline } from "react-icons/io5"; // Import ekleyin
+import { IoCloseCircle } from "react-icons/io5"; // X ikonu için import ekleyin
 
 import axios from 'axios';
 
@@ -19,6 +21,10 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
 
     const { authState, setAuthState } = useContext(AuthContext);
     const [AllChats, setAllChats] = useState([]);
+    const [dropdownOpen, setDropdownOpen] = useState(false);
+    const dropdownRef = useRef(null);
+    const [searchTerm, setSearchTerm] = useState("");
+
     const handleLogout = () => {
         setAuthState({ username: "", id: 0, status: false });
         localStorage.removeItem("accessToken");
@@ -49,6 +55,47 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
             });
     }, []);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setDropdownOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    // Filtrelenmiş sohbetleri hesapla
+    const filteredChats = AllChats.filter(chat => 
+        chat.username.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    // Highlight fonksiyonu
+    const highlightText = (text, highlight) => {
+        if (!highlight.trim()) {
+            return <span>{text}</span>;
+        }
+        
+        const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+        
+        return (
+            <span>
+                {parts.map((part, index) => 
+                    part.toLowerCase() === highlight.toLowerCase() ? (
+                        <span key={index} className="text-green-600">
+                            {part}
+                        </span>
+                    ) : (
+                        <span key={index}>{part}</span>
+                    )
+                )}
+            </span>
+        );
+    };
+
     return (
         <div className="w-64 bg-gray-800 text-white flex flex-col overflow-hidden rounded-xl">
             {/* Header */}
@@ -63,14 +110,41 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                         <div>{authState.username}</div>
                     </div>
                     <div className="ms-auto me-2">
-                        <div
-                            className="rounded-full bg-gray-700 flex items-center justify-center"
-                            style={{
-                                width: "40px",
-                                height: "40px",
-                            }}
-                        >
-                            <HiOutlineDotsVertical size={25} />
+                        <div ref={dropdownRef} className="relative">
+                            <div
+                                className="rounded-full bg-gray-700 flex items-center justify-center cursor-pointer hover:bg-gray-600 transition-colors"
+                                style={{
+                                    width: "40px",
+                                    height: "40px",
+                                }}
+                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                            >
+                                <HiOutlineDotsVertical size={25} />
+                            </div>
+                            {dropdownOpen && (
+                                <div className="absolute right-0 z-50 mt-2 w-48 bg-gray-800 rounded-lg shadow-lg border border-gray-700">
+                                    <ul className="py-2">
+                                        <li
+                                            className="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2"
+                                            onClick={() => {
+                                                console.log('Yeni grup oluştur tıklandı');
+                                                setDropdownOpen(false);
+                                            }}
+                                        >
+                                            <span>🔰 Yeni Grup</span>
+                                        </li>
+                                        <li
+                                            className="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2"
+                                            onClick={() => {
+                                                console.log('Arkadaş ekle tıklandı');
+                                                setDropdownOpen(false);
+                                            }}
+                                        >
+                                            <span>👥 Arkadaş Ekle</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -84,27 +158,56 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                             <input
                                 type="search"
                                 id="default-search"
-                                className="block w-full p-2 ps-10 text-sm rounded-lg 
-                                   dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400
-                                 "
+                                className="block w-full p-2 ps-10 pe-10 text-sm rounded-lg 
+                                    dark:bg-gray-900 outline-none"
                                 placeholder="Search by name"
-                                required
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
                             />
+                            {searchTerm && (
+                                <button
+                                    className="absolute inset-y-0 end-0 flex items-center pe-3 cursor-pointer hover:opacity-80 transition-opacity"
+                                    onClick={() => setSearchTerm("")}
+                                >
+                                    <IoCloseCircle 
+                                        size={20} 
+                                        className="text-gray-400 hover:text-gray-300"
+                                    />
+                                </button>
+                            )}
                         </div>
                     </div>
                 </div>
                 <div className="mt-3 flex justify-between">
-                    <div style={{ color: "#696463" }}>
-                        <IoChatboxOutline className="mx-auto" size={25} />
-                        <p>Chats</p>
+                    <div 
+                        className="cursor-pointer group flex flex-col items-center"
+                        style={{ color: "#696463" }}
+                    >
+                        <IoChatboxOutline 
+                            className="mx-auto transform transition-all duration-200 group-hover:scale-110 group-hover:text-[#db4f10]" 
+                            size={25} 
+                        />
+                        <p className="transition-colors duration-200 group-hover:text-[#db4f10]">Chats</p>
                     </div>
-                    <div style={{ color: "#696463" }}>
-                        <MdGroup className="mx-auto" size={25} />
-                        <p>Groups</p>
+                    <div 
+                        className="cursor-pointer group flex flex-col items-center"
+                        style={{ color: "#696463" }}
+                    >
+                        <MdGroup 
+                            className="mx-auto transform transition-all duration-200 group-hover:scale-110 group-hover:text-[#db4f10]" 
+                            size={25} 
+                        />
+                        <p className="transition-colors duration-200 group-hover:text-[#db4f10]">Groups</p>
                     </div>
-                    <div style={{ color: "#696463" }}>
-                        <LuBellRing className="mx-auto" size={25} />
-                        <p>Notification</p>
+                    <div 
+                        className="cursor-pointer group flex flex-col items-center"
+                        style={{ color: "#696463" }}
+                    >
+                        <LuBellRing 
+                            className="mx-auto transform transition-all duration-200 group-hover:scale-110 group-hover:text-[#db4f10]" 
+                            size={25} 
+                        />
+                        <p className="transition-colors duration-200 group-hover:text-[#db4f10]">Notification</p>
                     </div>
                 </div>
                 <hr className="mt-3" />
@@ -112,7 +215,7 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
 
             {/* Chat List */}
             <ul className="flex-1 overflow-y-auto custom-scrollbar">
-                {AllChats.map((chat) => (
+                {filteredChats.map((chat) => (
                     <li
                         key={chat.id}
                         onClick={() => handleSelectChat(chat)}
@@ -124,7 +227,9 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                             alt=""
                         />
                         <div className="ms-3 flex flex-col">
-                            <h3 className="font-semibold">{chat.username}</h3>
+                            <h3 className="font-semibold">
+                                {highlightText(chat.username, searchTerm)}
+                            </h3>
                             <p className='text-gray-400'>last message</p>
                         </div>
                         <div className="flex ms-auto flex-col text-gray-400">
@@ -144,13 +249,11 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                     Logout
                 </button>
                 <button
+                    onClick={onOpenSettings}
                     className="text-green-500 hover:text-green-700"
                     title="Settings"
                 >
-                    <i
-                        onClick={onOpenSettings}
-                        className="fa-solid fa-gear cursor-pointer"
-                    ></i>
+                    <IoSettingsOutline size={20} />
                 </button>
             </div>
         </div>
