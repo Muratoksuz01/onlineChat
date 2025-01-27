@@ -33,12 +33,12 @@ function Login() {
       .post("http://localhost:8000/api/users/signin", values) // Portu kontrol edin
       .then((response) => {
         console.log("login gelen cevap :", response.data);
-        const { token, userId, username ,avatar} = response.data;
+        const { token, userId, username ,avatar,phone} = response.data;
 
         // Kullanıcı verilerini authState'e kaydediyoruz
-        setAuthState({ username, id: userId, status: true ,avatar:avatar});
+        setAuthState({ username, id: userId, status: true ,avatar:avatar,phone:phone});
         localStorage.setItem("accessToken", token);
-     //  connectWebSocket(response.data.username);
+       connectWebSocket(response.data.userId);
 
         // Giriş başarılı, yönlendiriyoruz
         navigate("/dashboard");

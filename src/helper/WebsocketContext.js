@@ -15,7 +15,7 @@ export const WebSocketProvider = ({ children }) => {
       ws.current.close();
     }
 
-    const socket = new WebSocket(`ws://localhost:8000?ReceiverUserId=${userId}`);
+    const socket = new WebSocket(`ws://localhost:8000?UserId=${userId}`);
 
     socket.onopen = () => setIsConnected(true);
     socket.onclose = () => setIsConnected(false);

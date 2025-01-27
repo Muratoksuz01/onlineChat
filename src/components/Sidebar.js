@@ -7,41 +7,35 @@ import { IoChatboxOutline } from "react-icons/io5";
 import { FaCircleCheck } from "react-icons/fa6";
 import { HiOutlineDotsVertical } from "react-icons/hi";
 import { FiSearch } from "react-icons/fi";
-import { useWebSocket } from '../helper/WebsocketContext';
+import { WebSocketContext } from '../helper/WebsocketContext';
 import { IoSettingsOutline } from "react-icons/io5"; // Import ekleyin
 import { IoCloseCircle } from "react-icons/io5"; // X ikonu için import ekleyin
 
 import axios from 'axios';
 
 function Sidebar({ onSelectChat, onOpenSettings }) {
-    const { isConnected, disconnect, connectWebSocket } = useWebSocket();
 
     const navigate = useNavigate();
     const [activeChat, setActiveChat] = useState(null);  // Store active chat id
-
+    const {disconnect}=useContext(WebSocketContext)
     const { authState, setAuthState } = useContext(AuthContext);
     const [AllChats, setAllChats] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const [contextMenu, setContextMenu] = useState({ visible: false, x: 0, y: 0, chatId: null });
 
     const handleLogout = () => {
         setAuthState({ username: "", id: 0, status: false });
         localStorage.removeItem("accessToken");
+        disconnect()
         navigate("/login");
     };
 
     const handleSelectChat = (chat) => {
         setActiveChat(chat.id); // Set active chat id when a chat is selected
         onSelectChat(chat); // Parent informs about the selected chat
-        if (isConnected) {
-            console.log("suanda bir websoket baglantısı var")
-            disconnect()
-            console.log("suanda var olan baglantı kapatıldı ")
-            connectWebSocket(chat.id)
-        } else {
-            connectWebSocket(chat.id)
-        }
+       
     };
 
     useEffect(() => {
@@ -94,6 +88,24 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                 )}
             </span>
         );
+    };
+
+    // Context menu'yü kapatmak için click-outside handler
+    useEffect(() => {
+        const handleClick = () => setContextMenu({ visible: false, x: 0, y: 0, chatId: null });
+        document.addEventListener('click', handleClick);
+        return () => document.removeEventListener('click', handleClick);
+    }, []);
+
+    // Sağ tık menüsünü göster
+    const handleContextMenu = (e, chatId) => {
+        e.preventDefault();
+        setContextMenu({
+            visible: true,
+            x: e.pageX,
+            y: e.pageY,
+            chatId
+        });
     };
 
     return (
@@ -219,6 +231,7 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                     <li
                         key={chat.id}
                         onClick={() => handleSelectChat(chat)}
+                        onContextMenu={(e) => handleContextMenu(e, chat.id)}
                         className={`flex px-4 py-2 cursor-pointer hover:bg-gray-700 ${activeChat === chat.id ? 'bg-gray-600 border-l-4 border-blue-500' : ''}`}
                     >
                         <img
@@ -239,6 +252,55 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                     </li>
                 ))}
             </ul>
+
+            {/* Context Menu */}
+            {contextMenu.visible && (
+                <div 
+                    className="fixed bg-gray-800 border border-gray-700 rounded-lg shadow-lg py-2 w-48 z-50"
+                    style={{ 
+                        top: `${contextMenu.y}px`, 
+                        left: `${contextMenu.x}px` 
+                    }}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <div 
+                        className="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2"
+                        onClick={() => {
+                            console.log(`Kullanıcı silindi: ${contextMenu.chatId}`);
+                            setContextMenu({ visible: false, x: 0, y: 0, chatId: null });
+                        }}
+                    >
+                        <span>🗑️ Kullanıcıyı Sil</span>
+                    </div>
+                    <div 
+                        className="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2"
+                        onClick={() => {
+                            console.log(`Sohbet arşivlendi: ${contextMenu.chatId}`);
+                            setContextMenu({ visible: false, x: 0, y: 0, chatId: null });
+                        }}
+                    >
+                        <span>📦 Arşive Al</span>
+                    </div>
+                    <div 
+                        className="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2"
+                        onClick={() => {
+                            console.log(`Sohbet sessize alındı: ${contextMenu.chatId}`);
+                            setContextMenu({ visible: false, x: 0, y: 0, chatId: null });
+                        }}
+                    >
+                        <span>🔕 Sessize Al</span>
+                    </div>
+                    <div 
+                        className="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2"
+                        onClick={() => {
+                            console.log(`Mesajlar temizlendi: ${contextMenu.chatId}`);
+                            setContextMenu({ visible: false, x: 0, y: 0, chatId: null });
+                        }}
+                    >
+                        <span>🧹 Clear Messages</span>
+                    </div>
+                </div>
+            )}
 
             {/* Footer */}
             <div className="px-4 py-3 bg-gray-950 flex items-center justify-between">
