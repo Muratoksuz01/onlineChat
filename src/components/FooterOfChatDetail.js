@@ -6,7 +6,7 @@ import { MdOutlineAttachFile } from "react-icons/md";
 import EmojiPicker from "emoji-picker-react";
 import { useWebSocket } from '../helper/WebsocketContext';
 
-function FooterOfChatDetail({ chat }) {
+function FooterOfChatDetail({ chat ,messages,setMessages}) {
   const [YourMessage, setYourMessage] = useState("");
   const [emojiPickerVisible, setEmojiPickerVisible] = useState(false);
   const { authState } = useContext(AuthContext);
@@ -64,6 +64,7 @@ function FooterOfChatDetail({ chat }) {
     };
     console.log("FooterOfChatDetail handleOnSubmit giden mesaj", messageData)
     sendMessage({ type: "NEW_MESSAGE", data: messageData }); // Mesajı gönder
+    setMessages(prevMessages => [...prevMessages, messageData]);
     setYourMessage(""); // Mesaj kutusunu temizle
   };
   const handleKeyDown = (e) => {

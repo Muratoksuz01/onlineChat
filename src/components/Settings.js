@@ -72,7 +72,7 @@ function Settings() {
                     </div>
 
                     {/* User Info */}
-                    <div className="flex-1 space-y-4">
+                    <div className="flex-1 space-y-4 ">
                         {/* Username Field */}
                         <div className="flex items-center gap-4">
                             <div className="flex-1">

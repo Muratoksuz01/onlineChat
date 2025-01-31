@@ -10,16 +10,14 @@ import { FiSearch } from "react-icons/fi";
 import { WebSocketContext } from '../helper/WebsocketContext';
 import { IoSettingsOutline } from "react-icons/io5"; // Import ekleyin
 import { IoCloseCircle } from "react-icons/io5"; // X ikonu için import ekleyin
-
 import axios from 'axios';
 
-function Sidebar({ onSelectChat, onOpenSettings }) {
+function Sidebar({ onSelectChat, onOpenSettings,onOpenNewPanel,AllChatList,setAllChatList }) {
 
     const navigate = useNavigate();
     const [activeChat, setActiveChat] = useState(null);  // Store active chat id
     const {disconnect}=useContext(WebSocketContext)
     const { authState, setAuthState } = useContext(AuthContext);
-    const [AllChats, setAllChats] = useState([]);
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
     const [searchTerm, setSearchTerm] = useState("");
@@ -38,16 +36,10 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
        
     };
 
-    useEffect(() => {
-        axios.get("http://localhost:8000/api/users/GetAllChat")
-            .then(res => {
-                console.log("sidebar useeffect allData:", res.data.alluser);
-                setAllChats(res.data.alluser);
-            })
-            .catch(err => {
-                console.error("Axios Error:", err.message);
-            });
-    }, []);
+   useEffect(()=>{
+    console.log(AllChatList)
+   })
+      
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -63,9 +55,9 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
     }, []);
 
     // Filtrelenmiş sohbetleri hesapla
-    const filteredChats = AllChats.filter(chat => 
+    const filteredChats = (AllChatList && Array.isArray(AllChatList) ? AllChatList.filter(chat => 
         chat.username.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    ) : []) || [];
 
     // Highlight fonksiyonu
     const highlightText = (text, highlight) => {
@@ -140,6 +132,7 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                                             className="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2"
                                             onClick={() => {
                                                 console.log('Yeni grup oluştur tıklandı');
+                                                onOpenNewPanel("NewGroup")
                                                 setDropdownOpen(false);
                                             }}
                                         >
@@ -149,6 +142,7 @@ function Sidebar({ onSelectChat, onOpenSettings }) {
                                             className="px-4 py-2 hover:bg-gray-700 cursor-pointer flex items-center gap-2"
                                             onClick={() => {
                                                 console.log('Arkadaş ekle tıklandı');
+                                                onOpenNewPanel("NewChat")
                                                 setDropdownOpen(false);
                                             }}
                                         >

@@ -4,42 +4,42 @@
       "id": "1",
       "username": "murat",
       "password": "1234",
-      "phone": "+905551234567",
+      "phone": "+905511546370",
       "avatar": "/uploads/murat1.jpg"
     },
     {
       "id": "2",
       "username": "user1",
-      "password": "user1",
-      "phone": "+905559876543",
+      "password": "1234",
+      "phone": "+901",
       "avatar": "/uploads/murat2.jpg"
     },
     {
       "id": "3",
       "username": "user2",
-      "password": "user2",
-      "phone": "+905551112222",
+      "password": "1234",
+      "phone": "+902",
       "avatar": "/uploads/ali.jpg"
     },
     {
       "id": "4",
       "username": "user3",
-      "password": "user3",
-      "phone": "+905555555555",
+      "password": "1234",
+      "phone": "+903",
       "avatar": "/uploads/murat2.jpg"
     },
     {
       "id": "5",
       "username": "user4",
-      "password": "user4",
-      "phone": "+905555555555",
+      "password": "1234",
+      "phone": "+904",
       "avatar": "/uploads/murat1.jpg"
     },
     {
       "id": "6",
       "username": "user5",
-      "password": "user5",
-      "phone": "+905555555555",
+      "password": "1234",
+      "phone": "+905",
       "avatar": "/uploads/murat2.jpg"
     }
   ],
@@ -183,258 +183,78 @@
       "ReceiverId": "3",
       "message": "Sure, I have some time after 4 PM.",
       "timestamp": "2025-01-13T15:10:00Z"
+    }
+  ],
+  "Friendships": [
+    {
+      "id": "1",
+      "user_id": 1,
+      "friend_id": 2
     },
     {
-      "id": "448131",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "aaaa",
-      "timestamp": "2025-01-15T16:52:19.371Z"
+      "id": "2",
+      "user_id": 1,
+      "friend_id": 3
     },
     {
-      "id": "25280",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "aaaa",
-      "timestamp": "2025-01-15T16:52:25.186Z"
+      "id": "3",
+      "user_id": 1,
+      "friend_id": 4
     },
     {
-      "id": "796728",
-      "SenderId": "1",
-      "ReceiverId": "1",
-      "message": "murah merhba",
-      "timestamp": "2025-01-16T10:15:33.893Z"
+      "id": "4",
+      "user_id": 2,
+      "friend_id": 1
     },
     {
-      "id": "765486",
-      "SenderId": "1",
-      "ReceiverId": "1",
-      "message": "merba2",
-      "timestamp": "2025-01-16T10:16:08.027Z"
+      "id": "5",
+      "user_id": 2,
+      "friend_id": 3
     },
     {
-      "id": "140176",
-      "SenderId": "1",
-      "ReceiverId": "3",
-      "message": "😁😃😃😃😃😃😃😃😃vdsvsdvsd",
-      "timestamp": "2025-01-16T11:23:24.078Z"
+      "id": "6",
+      "user_id": 3,
+      "friend_id": 1
     },
     {
-      "id": "952897",
-      "SenderId": "1",
-      "ReceiverId": "3",
-      "message": "ali",
-      "timestamp": "2025-01-16T11:23:53.275Z"
+      "id": "7",
+      "user_id": 3,
+      "friend_id": 5
     },
     {
-      "id": "238934",
-      "SenderId": "1",
-      "ReceiverId": "3",
-      "message": "c",
-      "timestamp": "2025-01-16T11:24:12.740Z"
+      "id": "8",
+      "user_id": 4,
+      "friend_id": 1
     },
     {
-      "id": "1ddd",
-      "SenderId": "6",
-      "ReceiverId": "1",
-      "message": "ali",
-      "timestamp": "2025-01-25T22:18:28.248Z"
+      "id": "9",
+      "user_id": 4,
+      "friend_id": 2
     },
     {
-      "id": "3310",
-      "SenderId": "6",
-      "ReceiverId": "6",
-      "message": "ali",
-      "timestamp": "2025-01-25T22:18:39.148Z"
+      "id": "10",
+      "user_id": 5,
+      "friend_id": 3
     },
     {
-      "id": "786b",
-      "SenderId": "6",
-      "ReceiverId": "6",
-      "message": "ali",
-      "timestamp": "2025-01-25T22:19:54.067Z"
+      "id": "11",
+      "user_id": 5,
+      "friend_id": 6
     },
     {
-      "id": "3fc3",
-      "SenderId": "6",
-      "ReceiverId": "1",
-      "message": "user5",
-      "timestamp": "2025-01-25T22:20:58.656Z"
+      "id": "12",
+      "user_id": 6,
+      "friend_id": 5
     },
     {
-      "id": "cc53",
-      "SenderId": "6",
-      "ReceiverId": "1",
-      "message": "ali",
-      "timestamp": "2025-01-25T22:21:33.777Z"
+      "id": "13",
+      "user_id": 6,
+      "friend_id": 4
     },
     {
-      "id": "e6c6",
-      "SenderId": "6",
-      "ReceiverId": "1",
-      "message": "cdssd",
-      "timestamp": "2025-01-25T22:22:18.441Z"
-    },
-    {
-      "id": "acda",
-      "SenderId": "6",
-      "ReceiverId": "1",
-      "message": "aa",
-      "timestamp": "2025-01-25T22:27:52.961Z"
-    },
-    {
-      "id": "d4c9",
-      "SenderId": "6",
-      "ReceiverId": "1",
-      "message": "bb",
-      "timestamp": "2025-01-25T22:28:39.001Z"
-    },
-    {
-      "id": "8e93",
-      "SenderId": "6",
-      "ReceiverId": "1",
-      "message": "cc",
-      "timestamp": "2025-01-25T22:31:22.081Z"
-    },
-    {
-      "id": "5afe",
-      "SenderId": "6",
-      "ReceiverId": "1",
-      "message": "dd",
-      "timestamp": "2025-01-25T22:31:57.525Z"
-    },
-    {
-      "id": "4680",
-      "SenderId": "6",
-      "ReceiverId": "1",
-      "message": "ee",
-      "timestamp": "2025-01-25T22:34:23.346Z"
-    },
-    {
-      "id": "c41c",
-      "SenderId": "1",
-      "ReceiverId": "6",
-      "message": "aa",
-      "timestamp": "2025-01-25T22:34:38.867Z"
-    },
-    {
-      "id": "4793",
-      "SenderId": "1",
-      "ReceiverId": "6",
-      "message": "bunya ",
-      "timestamp": "2025-01-25T22:35:41.607Z"
-    },
-    {
-      "id": "7816",
-      "SenderId": "1",
-      "ReceiverId": "6",
-      "message": "utjy",
-      "timestamp": "2025-01-25T22:35:58.692Z"
-    },
-    {
-      "id": "71fc",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "vdfs\n",
-      "timestamp": "2025-01-26T20:55:39.520Z"
-    },
-    {
-      "id": "77b9",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "vfdsvd\nvfdvd",
-      "timestamp": "2025-01-26T20:55:45.160Z"
-    },
-    {
-      "id": "d0c6",
-      "SenderId": "1",
-      "ReceiverId": "1",
-      "message": "vfv",
-      "timestamp": "2025-01-26T21:52:28.316Z"
-    },
-    {
-      "id": "b0be",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "aaaa",
-      "timestamp": "2025-01-27T09:41:41.296Z"
-    },
-    {
-      "id": "6314",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "vvvv",
-      "timestamp": "2025-01-27T09:43:27.118Z"
-    },
-    {
-      "id": "e3b1",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "ddd",
-      "timestamp": "2025-01-27T09:45:05.014Z"
-    },
-    {
-      "id": "abb8",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "ee",
-      "timestamp": "2025-01-27T09:45:15.384Z"
-    },
-    {
-      "id": "cc1f",
-      "SenderId": "1",
-      "ReceiverId": "3",
-      "message": "e",
-      "timestamp": "2025-01-27T09:47:40.215Z"
-    },
-    {
-      "id": "9071",
-      "SenderId": "1",
-      "ReceiverId": "3",
-      "message": "a",
-      "timestamp": "2025-01-27T09:51:43.501Z"
-    },
-    {
-      "id": "ecc4",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "cswe",
-      "timestamp": "2025-01-27T09:52:42.205Z"
-    },
-    {
-      "id": "9d5e",
-      "SenderId": "1",
-      "ReceiverId": "4",
-      "message": "e",
-      "timestamp": "2025-01-27T09:57:16.085Z"
-    },
-    {
-      "id": "6969",
-      "SenderId": "1",
-      "ReceiverId": "1",
-      "message": "ee",
-      "timestamp": "2025-01-27T09:58:01.795Z"
-    },
-    {
-      "id": "f5ce",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "merhaba",
-      "timestamp": "2025-01-27T09:59:03.619Z"
-    },
-    {
-      "id": "e522",
-      "SenderId": "2",
-      "ReceiverId": "1",
-      "message": "merhaba",
-      "timestamp": "2025-01-27T09:59:17.559Z"
-    },
-    {
-      "id": "c53b",
-      "SenderId": "1",
-      "ReceiverId": "2",
-      "message": "nasılsın ",
-      "timestamp": "2025-01-27T09:59:22.610Z"
+      "id": "2b5f",
+      "user_id": "1",
+      "friend_id": "1"
     }
   ]
 }

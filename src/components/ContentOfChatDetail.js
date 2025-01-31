@@ -3,46 +3,16 @@ import { useWebSocket } from "../helper/WebsocketContext";
 import { AuthContext } from "../helper/AuthContex";
 import axios from 'axios';
 
-function ContentOfChatDetail({ chat }) {
-  const [messages, setMessages] = useState([]);
-  const { message } = useWebSocket(); // ws yerine message kullanıyoruz
+function ContentOfChatDetail({ chat,messages,setMessages }) {
+ // const { message } = useWebSocket(); // ws yerine message kullanıyoruz
   const { authState } = useContext(AuthContext)
   // Mevcut mesajları getir
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000/api/users/GetAllMessages`, {
-          params: {
-            receiverId: chat.id
-          },
-          headers: {
-            'accessToken': `${localStorage.getItem('accessToken')}`
-          }
-        });
-        console.log("response.data", response.data)
-        setMessages(response.data);
-      } catch (error) {
-        console.error("Mesajları getirirken hata:", error);
-      }
-    };
-
-    if (chat?.id) {
-      fetchMessages();
-    }
-  }, [chat]);
+ 
 
 
 
-  //ket mesajlarını dinle
-  useEffect(() => {
-    if (message) {
-      console.log(" ws gelen message", message)
-      if (!message) return;
-      setMessages(prevMessages => [...prevMessages, message]);
-    }
-
-  }, [message]); // dependency'i message olarak güncelliyoruz
-
+ 
+ 
 
   return (
     <div style={{ height: "500px" }} className="flex flex-col overflow-y-auto custom-scrollbar">
